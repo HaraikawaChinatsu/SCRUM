@@ -1,0 +1,58 @@
+<h2>新規登録</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+　<div class="field">
+    <%= f.label :ニックネーム %><br />
+    <%= f.name_field :name, autofocus: true, autocomplete: "name" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :メールアドレス %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :パスワード %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :パスワード（確認用） %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :年齢 %><br />
+    <%= f.select :age, [["〜１０代", "10"], ["２０代", "20"], ["３０代", "30"], ["４０代", "40"], ["５０代", "50"], ["６０代以上", "60"]], include_blank: "選択して下さい" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :目標体重 %><br />
+    <%= f.number_field :target_weight, step: "0.01"  %>
+  </div>
+
+  <div class="field">
+    <%= f.label :現在体重 %><br />
+    <%= f.number_field :weight, step: "0.01"  %>
+  </div>
+
+  <div class="field">
+    <%= f.label :体重・グラフをチーム内で公開する %><br />
+     <%= form_with(model: user, local: true) do |f| %>
+   　<%= f.radio_button :public_status, :公開, checked: true %>
+ 　   <%= f.radio_button :public_status, :非公開 %>
+　 　<% end %>
+    <h4>※チームに所属しない場合、体重とグラフは公開されません。</h4>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "新規登録" %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>
