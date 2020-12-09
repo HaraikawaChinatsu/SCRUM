@@ -10,9 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_02_110925) do
+ActiveRecord::Schema.define(version: 2020_12_08_094941) do
 
   create_table "diaries", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title", default: "", null: false
+    t.integer "weight", null: false
+    t.text "text", default: "", null: false
+    t.string "image_id"
+    t.integer "user_id"
+    t.datetime "date"
+  end
+
+  create_table "diary_comments", force: :cascade do |t|
+    t.text "comment"
+    t.integer "user_id"
+    t.integer "image_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "diary_id"
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "diary_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -20,21 +42,38 @@ ActiveRecord::Schema.define(version: 2020_12_02_110925) do
   create_table "requests", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "team_id", null: false
+    t.integer "user_id", null: false
+    t.integer "status", null: false
   end
 
   create_table "team_members", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "team_id", null: false
   end
 
   create_table "teams", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.string "name", null: false
+    t.text "introduction", null: false
+    t.string "image_id"
+    t.integer "minimum_people"
+    t.integer "max_people"
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "name", default: "", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
+    t.integer "age", null: false
+    t.integer "target_weight", null: false
+    t.integer "weight", null: false
+    t.boolean "public_status", null: false
+    t.string "body"
+    t.string "image_id"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

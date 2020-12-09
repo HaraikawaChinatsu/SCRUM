@@ -1,0 +1,66 @@
+<% if flash[:notice] %>
+ <p class="text-active"><%= flash[:notice] %></p>
+<% end %>
+
+<div class="container">
+  <div class='row'>
+  	
+   <div class="col-xs-3 bg-success">
+    <h2>カレンダー</h2>
+    <!--%= render 'users/info', user: @book.user %>-->
+   </div>
+  </div>
+
+
+  <div class="col-xs-9 bg-info">
+   <h2>マイページ</h2>
+  	<table class='table'>
+	  <h3>登録情報</h3>
+		<tr>
+			<th></th>
+			<th></th>
+			<th></th>
+		</tr>
+		<tr>
+			<tr>
+				<td>ニックネーム</td>
+				<td>:<%= @user.name %></td>
+			</tr>
+			<tr>
+				<td>年齢</td>
+				<td>:<%= @user.age %>代</td>
+			</tr>
+			<tr>
+				<td>メールアドレス</td>
+				<td colspan="2">:<%= @user.email %></td>
+			</tr>
+			<tr>
+				<td>目標体重</td>
+				<td colspan="2">:<%= @user.target_weight %>kg</td>
+			</tr>
+			<tr>
+				<td>現在記録体重</td>
+				<td colspan="2">:<%= @user.weight %>kg</td>
+			</tr>
+			<tr>
+				<td>グラフ・体重公開ステータス</td>
+				<td colspan="2">:<%= @user.public_status %></td>
+			</tr>
+			<tr>
+				<td>一言</td>
+				<td colspan="2"><%= @user.body %></td>
+			</tr>
+		</tr>
+	  <%= link_to "編集する", edit_user_registration_path, class: "btn btn-success ml2" %>
+	</table>
+	<!--<div class="flex">-->
+	<!--	%= link_to "日記をつける", addresses_path, class: "btn btn-primary" %>-->
+	<!--	%= link_to "グラフを見る", orders_path, class: "btn btn-primary ml2" %>-->
+	<!--</div>-->
+	<!--<div class="flex">-->
+	<!--  <td>チーム参加ステータス</td>-->
+	<!--	%= link_to "参加中チーム", addresses_path, class: "btn btn-primary" %>-->
+	<!--	%= link_to "チームを新しく作る", orders_path, class: "btn btn-primary ml2" %>-->
+	<!--</div>-->
+  </div>
+</div>

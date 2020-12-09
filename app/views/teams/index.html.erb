@@ -1,0 +1,36 @@
+<section class="sct-color-1 slice">
+  <div class="container-fluid masonry-container">
+    <div class="row">
+      <div class="col-md-8 col-sm-offset-2">
+        <div class="masonry-wrapper-cols">
+          <div class="masonry-gutter"></div>
+          	<h2 class="section-ttl">チーム一覧</h2>
+       　　　   <% @teams.each do |team| %>
+            <div class="masonry-block">
+              <div class="block block-image v1">
+                <div class="block-content">
+                  <h3 class="block-title">
+                    <%= link_to team_path(team.id) do %>
+                      <i class="fa fa-map-marker"></i><%= team.name %>
+                    <% end %>
+                  </h3>
+                  <p>チームリーダー：<%= team.user_id.name %></p>
+                   <%= link_to user_path(team.id) do %>
+                   <i class="fa fa-map-marker"></i><%= team.user_id.name %>
+                   <% end %>
+
+                     <div class="block-image">
+                      <div class="view view-first">
+                       <%= attachment_image_tag team, :image, size: "100x100"%>
+                      </div>
+                    </div>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

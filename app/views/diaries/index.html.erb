@@ -1,0 +1,48 @@
+<section class="sct-color-1 slice">
+  <div class="container-fluid masonry-container">
+
+    <div class="row">
+      <div class="col-md-6 col-sm-offset-2">
+        <div class="masonry-wrapper-cols">
+          <div class="masonry-gutter"></div>
+          <% @diaries.each do |diary| %>
+            <div class="masonry-block">
+              <div class="block block-image v1">
+                <div class="block-content">
+                  <h3 class="block-title">
+                    <%= link_to diary_path(diary.id) do %>
+                      <i class="fa fa-map-marker"></i><%= diary.title %>
+                    <% end %>
+                  </h3>
+                  <p>記録日：<%= diary.date.strftime("%Y年%m月%d日") %></p>
+                  <p>記録体重：<%= diary.weight %>kg</p>
+
+                     <ul class="inline-meta">
+                      <li>By
+                       <%= diary.user.name %>
+                      </li>
+                      <li>
+                       <%= link_to "#{diary.diary_comments.count} コメント", diary_path(diary.id) %>
+                      </li>
+                     </ul>
+                  <div class="row">
+                   <div class="col-md-2 col-sm-offset-2">
+                     <div class="block-image">
+                      <div class="view view-first">
+                       <%= attachment_image_tag diary, :image, size: "100x100"%>
+                      </div>
+                     </div>
+                   </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%= paginate @diaries %>
