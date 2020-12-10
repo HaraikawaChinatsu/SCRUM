@@ -71,3 +71,9 @@ gem 'rails-i18n'
 gem 'enum_help'
 gem 'chart-js-rails', '~> 0.1.4'
 gem 'gon', '~> 6.2.0'
+gem 'simple_calendar', '~> 2.0'
+
+gem 'dotenv-rails'
+group :production do
+  gem 'mysql2'
+end
