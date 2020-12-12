@@ -6,7 +6,7 @@ class CreateDiaries < ActiveRecord::Migration[5.2]
       t.string :title,              null: false, default: ""
       t.date :date,              null: false
       t.integer :weight,            null: false
-      t.text :text,                 null: false, default: ""
+      t.text :text,                 null: false
       t.string :image_id
     end
   end
