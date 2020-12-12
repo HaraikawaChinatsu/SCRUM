@@ -10,7 +10,27 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= require simple_calendar
+ *= require_tree .
+ *= require_self
  */
 @import "bootstrap";
 
-body { padding-top: 70px; }
+body { padding-top: 70px;
+       background-image: image-url("yasai.jpg");
+}
+
+
+.header {
+  color: #f5e8cf;
+  background-color: #957e80;
+}
+
+.link {
+  color: #efc3bd;
+}
+
+.btn {
+  color: #957e80;
+  background-color: #f5e8cf;
+}

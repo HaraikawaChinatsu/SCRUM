@@ -4,15 +4,14 @@
 
 <div class="container">
   <div class='row'>
-  	
-   <div class="col-xs-3 bg-success">
+
+   <div class="col-xs-4">
     <h2>カレンダー</h2>
     <!--%= render 'users/info', user: @book.user %>-->
    </div>
-  </div>
 
 
-  <div class="col-xs-9 bg-info">
+  <div class="col-xs-8">
    <h2>マイページ</h2>
   	<table class='table'>
 	  <h3>登録情報</h3>
@@ -51,16 +50,17 @@
 				<td colspan="2"><%= @user.body %></td>
 			</tr>
 		</tr>
-	  <%= link_to "編集する", edit_user_registration_path, class: "btn btn-success ml2" %>
 	</table>
-	<!--<div class="flex">-->
-	<!--	%= link_to "日記をつける", addresses_path, class: "btn btn-primary" %>-->
-	<!--	%= link_to "グラフを見る", orders_path, class: "btn btn-primary ml2" %>-->
-	<!--</div>-->
-	<!--<div class="flex">-->
-	<!--  <td>チーム参加ステータス</td>-->
-	<!--	%= link_to "参加中チーム", addresses_path, class: "btn btn-primary" %>-->
-	<!--	%= link_to "チームを新しく作る", orders_path, class: "btn btn-primary ml2" %>-->
-	<!--</div>-->
+	<div class="flex">
+		<%= link_to "編集する", edit_user_registration_path, class: "btn" %>
+		<%= link_to "日記をつける", new_diary_path, class: "btn" %>
+		<%= link_to "グラフを見る", graph_path, class: "btn" %>
+	</div>
+	<div class="flex">
+	  <td>チーム参加ステータス</td>
+		<!--%= link_to "参加中チーム", team_path, class: "btn btn-primary" %>-->
+		<%= link_to "チームを新しく作る", new_team_path, class: "btn" %>
+	</div>
   </div>
+ </div>
 </div>

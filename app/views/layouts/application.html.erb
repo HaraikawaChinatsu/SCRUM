@@ -11,19 +11,20 @@
   </head>
 
     <% if user_signed_in? %>
-     <header class="navbar navbar-fixed-top navbar-inverse">
+     <!--<header class="navbar navbar-fixed-top navbar-inverse" style="background-color:#957e80;">-->
+     <header class="header" style="color:#f5e8cf;">
        <div class="container">
          <div class="navbar-header">
-          <%= link_to 'SCRUM', top_path, class: "logo" %>
+           <%= link_to image_tag("logo.png", class: "image"), top_path %>
          </div>
-         <nav>
+           <nav>
            <ul id="navbar" class="nav navbar-nav navbar-right navbar-collapse collapse">
-            <li><%= link_to 'HOME', top_path %></li>
-            <li><%= link_to 'About', about_path %></li>
-            <li><%= link_to 'My page', mypage_path %></li>
-            <!--<li>%= link_to 'Diary', diary_path %></li>-->
-            <li><%= link_to 'Team', teams_path %></li>
-            <li><%= link_to 'Logout', destroy_user_session_path %></li>
+            <li><%= link_to 'HOME', top_path, class: "link" %></li>
+            <li><%= link_to 'About', about_path, class: "link" %></li>
+            <li><%= link_to 'My page', mypage_path, class: "link" %></li>
+            <li><%= link_to 'Diary', diaries_path, class: "link" %></li>
+            <li><%= link_to 'Team', teams_path, class: "link" %></li>
+            <li><%= link_to 'Logout', destroy_user_session_path, class: "link" %></li>
           </ul>
          </nav>
         </div>
@@ -31,12 +32,12 @@
     <% else %>
       <header>
         <div class="header-content">
-          <%= link_to 'SCRUM', top_path, class: "logo" %>
+          <%= link_to image_tag("logo.png", class: "image"), top_path %>
           <ul class="flex">
-            <li><%= link_to 'HOME', top_path %></li>
-            <li><%= link_to 'About', about_path %></li>
-            <li><%= link_to 'Sign Up', new_user_registration_path %></li>
-            <li><%= link_to 'Login', new_user_session_path %></li>
+            <li><%= link_to 'HOME', top_path, class: "link" %></li>
+            <li><%= link_to 'About', about_path, class: "link" %></li>
+            <li><%= link_to 'Sign Up', new_user_registration_path, class: "link" %></li>
+            <li><%= link_to 'Login', new_user_session_path, class: "link" %></li>
           </ul>
         </div>
       </header>
@@ -49,6 +50,10 @@
     </div>
    </div>
 
-    <footer>Copyright © Infratop Inc. All Rights Reserved.</footer>
+    <footer>
+     <nav class="navbar navbar-dark" style="background-color:#957e80;">
+      Copyright © Infratop Inc. All Rights Reserved.
+     <nav>
+    </footer>
 
 </html>
