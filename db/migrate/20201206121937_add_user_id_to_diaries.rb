@@ -1,5 +1,5 @@
 class AddUserIdToDiaries < ActiveRecord::Migration[5.2]
   def change
-    add_column :diaries, :user_id, :integer, null:false
+    add_reference :diaries, :user, foreign_key: true
   end
 end

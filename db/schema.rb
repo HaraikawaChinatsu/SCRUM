@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2020_12_08_094941) do
     t.string "image_id"
     t.integer "user_id"
     t.datetime "date"
+    t.index ["user_id"], name: "index_diaries_on_user_id"
   end
 
   create_table "diary_comments", force: :cascade do |t|
