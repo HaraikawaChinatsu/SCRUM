@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 2020_12_08_094941) do
     t.integer "age", null: false
     t.integer "target_weight", null: false
     t.integer "weight", null: false
-    t.boolean "public_status", null: false
+    t.boolean "public_status", default: true, null: false
     t.string "body"
     t.string "image_id"
     t.string "reset_password_token"

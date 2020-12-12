@@ -7,10 +7,10 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.string :name,               null: false, default: ""
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
-      t.integer :age,               null: false, default: ""
-      t.integer :target_weight,     null: false, default: ""
-      t.integer :weight,            null: false, default: ""
-      t.boolean :public_status,     null: false, default: ""
+      t.integer :age,               null: false
+      t.integer :target_weight,     null: false
+      t.integer :weight,            null: false
+      t.boolean :public_status,     null: false, default: true
       t.string :body
       t.string :image_id
       ## Recoverable
