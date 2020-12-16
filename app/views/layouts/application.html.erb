@@ -10,30 +10,27 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+
     <% if user_signed_in? %>
-     <!--<header class="navbar navbar-fixed-top navbar-inverse" style="background-color:#957e80;">-->
-     <header class="header" style="color:#f5e8cf;">
+     <header class="header">
        <div class="container">
          <div class="navbar-header">
            <%= link_to image_tag("logo.png", class: "image"), top_path %>
-         </div>
-           <nav>
            <ul id="navbar" class="nav navbar-nav navbar-right navbar-collapse collapse">
             <li><%= link_to 'HOME', top_path, class: "link" %></li>
             <li><%= link_to 'About', about_path, class: "link" %></li>
             <li><%= link_to 'My page', mypage_path, class: "link" %></li>
             <li><%= link_to 'Diary', diaries_path, class: "link" %></li>
             <li><%= link_to 'Team', teams_path, class: "link" %></li>
-            <li><%= link_to 'Logout', destroy_user_session_path, class: "link" %></li>
+            <li><%= link_to 'Logout', sign_out_path, class: "link" %></li>
           </ul>
-         </nav>
         </div>
       </header>
     <% else %>
-      <header>
+      <header class="header">
         <div class="header-content">
           <%= link_to image_tag("logo.png", class: "image"), top_path %>
-          <ul class="flex">
+          <ul id="navbar" class="nav navbar-nav navbar-right navbar-collapse collapse">
             <li><%= link_to 'HOME', top_path, class: "link" %></li>
             <li><%= link_to 'About', about_path, class: "link" %></li>
             <li><%= link_to 'Sign Up', new_user_registration_path, class: "link" %></li>
@@ -41,8 +38,8 @@
           </ul>
         </div>
       </header>
+     </div>
     <% end %>
-
 
    <div class="container body-down">
     <div class="row">
@@ -50,10 +47,9 @@
     </div>
    </div>
 
-    <footer>
-     <nav class="navbar navbar-dark" style="background-color:#957e80;">
-      Copyright © Infratop Inc. All Rights Reserved.
-     <nav>
-    </footer>
-
+    <!--<footer>-->
+    <!-- <nav class="navbar navbar-dark" style="background-color:#b9cdbf;">-->
+    <!--  Copyright © Infratop Inc. All Rights Reserved.-->
+    <!-- <nav>-->
+    <!--</footer>-->
 </html>

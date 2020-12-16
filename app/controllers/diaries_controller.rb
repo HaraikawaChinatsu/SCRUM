@@ -26,6 +26,10 @@ class DiariesController < ApplicationController
     redirect_to diaries_path
   end
 
+  def edit
+    @diary = Diary.find(params[:id])
+  end
+
   private
   def diary_params
     params.require(:diary).permit(:title, :date, :weight, :text, :image)

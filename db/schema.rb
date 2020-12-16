@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2020_12_08_094941) do
     t.datetime "updated_at", null: false
     t.string "title", default: "", null: false
     t.integer "weight", null: false
-    t.text "text", default: "", null: false
+    t.text "text", null: false
     t.string "image_id"
     t.integer "user_id"
     t.datetime "date"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 2020_12_08_094941) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "team_id", null: false
+    t.integer "user_id", null: false
   end
 
   create_table "teams", force: :cascade do |t|

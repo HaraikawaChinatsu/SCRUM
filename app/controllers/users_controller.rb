@@ -5,9 +5,10 @@ class UsersController < ApplicationController
 
 
   def show
-    @user = current_user
-    @diaries = current_user.diaries
+    @user = User.find(params[:id])
+    @diaries = @user.diaries
     @diary = Diary.new
+    # @team = Team.find(params[:team_id])
   end
 
   def index

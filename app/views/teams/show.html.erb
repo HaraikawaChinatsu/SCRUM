@@ -1,0 +1,92 @@
+<div class="container">
+ <div class='row'>
+  <div class='col-xs-9'>
+		<h2>チーム詳細</h2>
+　　 <table class='table'>
+　　  <tr>
+			 <th></th>
+			 <th></th>
+			 <th></th>
+		  </tr>
+		  <tr>
+		    <td>チーム名</td>
+        <td>：<%= @team.name %></td>
+      </tr>
+      <tr>
+		    <td>チーム平均体重</td>
+        <td>：<%= @team.name %></td>
+      </tr>
+
+
+		<table class='table'>
+		  <tr>
+		   <!--each文で定義、whereで-->
+        <td><%= link_to user_path(@diary.user) do %>
+          <%= attachment_image_tag(@diary.user, :image_id, :fill, 100, 100, fallback: "no_image.jpg") %><br>
+          <%= @diary.user.name %>
+          <% end %>
+        </td>
+        <td><%= @diary.title %></td>
+        <td><%= @diary.date.strftime("%Y年%m月%d日") %></td>
+        <td><%= @diary.weight %>kg</td>
+      </tr>
+    </table>
+      <div class='col-xs-9'>
+        <table class='table'>
+        <%= @diary.text %>
+        </table>
+      </div>
+    <table>
+      <td>
+        <i class="fa fa-calendar"></i>
+    　  </td>
+          <% if @diary.favorited_by?(current_user) %>
+         <li>
+          <%= link_to diary_favorites_path(@diary), method: :delete do %>
+          <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+           <%= @diary.favorites.count %> すごいね
+          <% end %>
+         </li>
+          <% else %>
+         <li>
+          <%= link_to diary_favorites_path(@diary), method: :post do %>
+          <i class="fa fa-heart-o" aria-hidden="true"></i>
+           <%= @diary.favorites.count %> すごいね
+         <% end %>
+         </li>
+        <% end %>
+     </table>
+        <!--<td class="favorite-btn">%= render "favorites/favorite-btn", diary: @diary %></td>-->
+        <td>エールの数: <%= @diary.diary_comments.count %></td>
+
+        <% if @diary.user == current_user %>
+          <td><%= link_to 'Edit', edit_diary_path(@diary), class: "btn-sm btn-success edit_diary_#{@diary.id}" %></td>
+          <td><%= link_to 'Destroy', diary_path(@diary), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn-sm btn-danger destroy_book_#{@diary.id}"%></td>
+        <% end %>
+
+      <% @diary.diary_comments.each do |diary_comment| %>
+        <% diary_comment_user = diary_comment.user %>
+        <tr>
+        	<td>
+        		<%= link_to user_path(diary_comment_user), class: "user_#{diary_comment_user.id}" do %>
+          		<%= attachment_image_tag diary_comment_user, :image_id, :fill, 50, 50, fallback: "no_image.jpg", size: "50x50" %><br>
+          		<%= diary_comment_user.name %>
+        		<% end %>
+        	</td>
+        	<td><%= diary_comment.comment %></td>
+        	<% if current_user == diary_comment_user %>
+          	<td><%= link_to 'Destroy', diary_diary_comment_path(diary_comment.diary_id, diary_comment.id), class: 'btn-sm btn-danger', method: :delete %></td>
+        	<% end %>
+        </tr>
+      <% end %>
+    </table>
+
+    <%= form_with model:[@diary,@diary_comment] do |f| %>
+    <%= form_with model:[@diary] do |f| %>
+    <%= f.text_area :comment, size:"90x5" %>
+    <%= f.submit '送信'%>
+   <% end %>
+   <% end %>
+    </div>
+   </div>
+  </div>

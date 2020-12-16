@@ -28,12 +28,12 @@
 
     <div class="row">
      <div class="col-sm-7">
-     <label class="control-label" for="">参加人数</label>
+    　 <label class="control-label" for="">参加人数</label>
      </div>
     </div>
     <div class="row">
-   　  <div class="col-xs-4 form-inline"><%= f.number_field :minimum_people, class: 'form-control', step: "0" %>人〜</div>
-   　  <div class="col-xs-4 form-inline"><%= f.number_field :max_people, class: 'form-control', step: "0" %>人</div>
+   　  <div class="col-xs-4 form-inline"><%= f.number_field :minimum_people, class: 'form-control', min:1, max:99, step: "0" %>人〜</div>
+   　  <div class="col-xs-4 form-inline"><%= f.number_field :max_people, class: 'form-control', min:2, max:100, step: "0" %>人</div>
     </div>
 
     <div class="row">

@@ -16,21 +16,58 @@
  */
 @import "bootstrap";
 
+
+@font-face {
+  font-family: ‘Glyphicons Halflings’;
+  src: url(‘/assets/glyphicons-halflings-regular.eot’);
+  src: url(‘/asstes/glyphicons-halflings-regular.eot?#iefix’) format(‘embedded-opentype’),
+  url(‘/assets/glyphicons-halflings-regular.woff’) format(‘woff’),
+  url(‘/assets/glyphicons-halflings-regular.ttf’) format(‘truetype’),
+  url(‘/assets/glyphicons-halflings-regular.svg#glyphicons-halflingsregular’) format(‘svg’);
+}
+
 body { padding-top: 70px;
-       background-image: image-url("yasai.jpg");
+       background-image: image-url("yoga.jpg");
+       background-size: cover;
 }
 
 
 .header {
   color: #f5e8cf;
-  background-color: #957e80;
+  background-color: #b9cdbf;
+}
+
+.top_image {
+　width: 100%;
+  height: 400px;
 }
 
 .link {
-  color: #efc3bd;
+  color: #604461;
 }
 
 .btn {
   color: #957e80;
   background-color: #f5e8cf;
+}
+
+.wrapper{
+  min-height: 100vh;/*①高さの最小値*/
+  position: relative;/*②相対位置*/
+}
+
+footer {
+  width: 100%;
+  height: 200px;
+  position: absolute;/*②絶対位置*/
+  bottom: 0; /*下に固定*/
+}
+
+.icon_image {
+    width:  80px;
+    height: 80px;
+    border: 1px solid #b9cdbf;
+    border-radius: 50%;
+    background-size: 200px 200px;
+    background-position: right bottom;
 }

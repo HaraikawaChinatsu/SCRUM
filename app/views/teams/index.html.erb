@@ -1,36 +1,59 @@
-<section class="sct-color-1 slice">
-  <div class="container-fluid masonry-container">
-    <div class="row">
-      <div class="col-md-8 col-sm-offset-2">
-        <div class="masonry-wrapper-cols">
-          <div class="masonry-gutter"></div>
-          	<h2 class="section-ttl">チーム一覧</h2>
-       　　　   <% @teams.each do |team| %>
-            <div class="masonry-block">
-              <div class="block block-image v1">
-                <div class="block-content">
-                  <h3 class="block-title">
-                    <%= link_to team_path(team.id) do %>
-                      <i class="fa fa-map-marker"></i><%= team.name %>
-                    <% end %>
-                  </h3>
-                  <p>チームリーダー：<%= team.user_id.name %></p>
-                   <%= link_to user_path(team.id) do %>
-                   <i class="fa fa-map-marker"></i><%= team.user_id.name %>
-                   <% end %>
+<% if flash[:notice] %>
+ <p class="text-active"><%= flash[:notice] %></p>
+<% end %>
 
-                     <div class="block-image">
-                      <div class="view view-first">
-                       <%= attachment_image_tag team, :image, size: "100x100"%>
-                      </div>
-                    </div>
-                  </ul>
-                </div>
+<div class="container">
+ <div class='row'>
+  <div class="col-xs-9">
+   <h2>チーム一覧</h2>
+  	<table class='table'>
+		<tr>
+		  <th></th>
+			<th>チーム名</th>
+			<th>チームリーダー</th>
+			<th>参加人数</th>
+			<th>募集人数</th>
+			<th>チーム内目標平均体重</th>
+			<th><th>
+		</tr>
+		<tr>
+     <% @teams.each do |team| %>
+			<tr>
+				<td>
+            <%= attachment_image_tag team, :image, size: "100x100", class: 'icon_image' %>
+				</td>
+				<td><%= link_to team_path(team.id) do %><%= team.name %>
+            <% end %></td>
+				<td><%= link_to user_path(team.id) do %><%= team.user.name %>
+            <% end %></td>
+				<td><%= @team_members.count %>人</td>
+				<td><%= team.max_people %>人</td>
+				<!--平均体重を計算する-->
+				<td><%= team.max_people %>kg</td>
+        <td><% if user_signed_in? %>
+              <!--リクエスト中かどうかをチェック-->
+              <% if current_user.requests.find_by(team: team)&.waiting? %>
+               <p>リクエスト中</p>
+               <!--<p>%= link_to'リクエストを取り消す', team_request_path(team), method: :delete %></p>-->
+               <% elsif TeamMember.where(team_id: team.id, user_id: current_user.id).empty? %>
+              <div class="participation">
+               <%= link_to '参加する', team_requests_path(team), method: :post %>
               </div>
+             <% else %>
+              <div class="participation">
+               <p>参加中：<%= link_to team_path(team.id) do %><%= team.name %></p>
+             <% end %>
+               </div>
+               <div class="flex">
+	　　　       　　　　<!--%= link_to "退出する", team_path, class: "btn" %>-->
+               </div>
+             <% end %>
             </div>
           <% end %>
-        </div>
-      </div>
+        </tr>
+	 	    <% end %>
+	  	  </tr>
+	    </table>
     </div>
-  </div>
-</section>
+   </div>
+ </div>
