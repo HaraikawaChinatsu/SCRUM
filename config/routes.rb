@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'top' => 'homes#top', as: 'top'
   get 'about' => 'homes#about', as: 'about'
   get 'search' => 'homes#search', as: 'search'
-  get 'users/mypage' => 'users#show', as: 'mypage'
+  get 'users/mypage' => 'users#mypage', as: 'mypage'
   get 'users/graph' => 'users#graph', as: 'graph'
 
   root to: 'homes#top'

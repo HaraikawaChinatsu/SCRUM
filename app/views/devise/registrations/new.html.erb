@@ -3,6 +3,15 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
+　<div class="form-group has-icon">
+    <div class="user-edit-image">
+     <%= attachment_image_tag @user, :image, :fill, 60, 60, class: "img-circle pull-left profile-thumb", fallback: "no_image.jpg"%>
+    </div>
+    <label class="control-label sr-only" for="inputEmail">ProfileImage</label>
+   　 <%= f.attachment_field :image, placeholder: "プロフィール画像", class: "user-edit-form" %>
+  </div>
+  </br>
+
 　<div class="field">
     <%= f.label :ニックネーム %><br />
     <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
@@ -42,10 +51,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :体重・グラフをチーム内で公開する %><br />
-    <%= f.radio_button :public_status, :公開, checked: true %>
- 　  <%= f.radio_button :public_status, :非公開 %>
-    <h4>※チームに所属しない場合、体重とグラフは公開されません。</h4>
+    <%= f.label :一言 %><br />
+    <%= f.text_field :body  %>
   </div>
 
   <div class="actions">

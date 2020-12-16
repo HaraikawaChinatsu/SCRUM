@@ -4,6 +4,13 @@ class UsersController < ApplicationController
   # before_action :ensure_correct_user, only: [:edit, :update]
 
 
+  def mypage
+    @user = current_user
+    @diaries = current_user.diaries
+    @diary = Diary.new
+    # @team = Team.find(params[:team_id])
+  end
+
   def show
     @user = User.find(params[:id])
     @diaries = @user.diaries
@@ -42,6 +49,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :name, :password, :password_confirmation, :age, :target_weight, :weight, :public_status)
+    params.require(:user).permit(:email, :name, :password, :password_confirmation, :age, :target_weight, :weight, :public_status, :body, :image)
   end
 end

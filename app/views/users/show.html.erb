@@ -4,63 +4,81 @@
 
 <div class="container">
   <div class='row'>
-
    <div class="col-xs-4">
-    <h2>カレンダー</h2>
-    <!--%= render 'users/info', user: @book.user %>-->
-   </div>
-
-
-  <div class="col-xs-8">
-   <h2>マイページ</h2>
+    <h2>ユーザー情報</h2>
   	<table class='table'>
-	  <h3>登録情報</h3>
 		<tr>
-			<th></th>
-			<th></th>
-			<th></th>
-		</tr>
-		<tr>
-			<tr>
-				<td>ニックネーム</td>
-				<td>:<%= @user.name %></td>
-			</tr>
-			<tr>
-				<td>年齢</td>
-				<td>:<%= @user.age %>代</td>
-			</tr>
-			<tr>
-				<td>メールアドレス</td>
-				<td colspan="2">:<%= @user.email %></td>
-			</tr>
-			<tr>
-				<td>目標体重</td>
-				<td colspan="2">:<%= @user.target_weight %>kg</td>
-			</tr>
-			<tr>
-				<td>現在記録体重</td>
-				<td colspan="2">:<%= @user.weight %>kg</td>
-			</tr>
-			<tr>
-				<td>グラフ・体重公開ステータス</td>
-				<td colspan="2">:<%= @user.public_status %></td>
-			</tr>
-			<tr>
-				<td>一言</td>
-				<td colspan="2"><%= @user.body %></td>
-			</tr>
+		 <tr>
+          <%= attachment_image_tag @user, :image_id, size: "100x100", class: 'icon_image' %>
+         </tr>
+         <tr>
+		  <td>ニックネーム</td>
+		  <td>:<%= @user.name %></td>
+		 </tr>
+	     <tr>
+		  <td>年齢</td>
+		  <td>:<%= @user.age %>代</td>
+		 </tr>
+		 <tr>
+		  <td>メールアドレス</td>
+		  <td colspan="2">:<%= @user.email %></td>
+		 </tr>
+		 <tr>
+		  <td>目標体重</td>
+		  <td colspan="2">:<%= @user.target_weight %>kg</td>
+		 </tr>
+		 <tr>
+		  <td>現在記録体重</td>
+		  <td colspan="2">:<%= @user.weight %>kg</td>
+	     </tr>
+		 <tr>
+		  <td>グラフ・体重公開ステータス</td>
+		  <td colspan="2">:<%= @user.public_status %></td>
+		 </tr>
+		 <tr>
+		  <td>一言</td>
+		  <td colspan="2"><%= @user.body %></td>
+		 </tr>
 		</tr>
 	</table>
 	<div class="flex">
-		<%= link_to "編集する", edit_user_registration_path, class: "btn" %>
-		<%= link_to "日記をつける", new_diary_path, class: "btn" %>
 		<%= link_to "グラフを見る", graph_path, class: "btn" %>
 	</div>
-	<div class="flex">
-	  <td>チーム参加ステータス</td>
-		<!--%= link_to "参加中＆リクエスト中チーム一覧", team_request_path(@team), class: "btn btn-primary" %>-->
-		<%= link_to "チームを新しく作る", new_team_path, class: "btn" %>
-	</div>
+   </div>
+
+  <div class="col-xs-8">
+   <h2>日記一覧</h2>
+    <table class='table'>
+	 <tr>
+	  <% @diaries.each do |diary| %>
+	   <th>タイトル</th>
+	   <th>記録日</th>
+	   <th></th>
+	   <th></th>
+	 </tr>
+	 <tr>
+		<td><%= link_to diary_path(diary.id) do %>
+        <%= diary.title %>
+        <% end %></td>
+		<td><%= diary.date.strftime("%Y年%m月%d日") %></td>
+		<td>
+	  <ul class="inline-meta">
+       <li>
+        <%= render "favorites/favorite-btn", diary: diary %></td>
+       </li>
+       <li>
+        <%= link_to "#{diary.diary_comments.count} エール", diary_path(diary.id) %>
+       </li>
+      </ul>
+	 </td>
+	 <td>
+      <% if diary.user == current_user %>
+       <!--<td>%= link_to 'Edit', edit_diary_path(@diary), class: "btn-sm btn-success edit_diary_#{@diary.id}" %></td>-->
+       <!--<td>%= link_to 'Edit', edit_diary_path(@diary), class: "btn-sm btn-success" %></td>-->
+       <!--<td>%= link_to 'Destroy', diary_path(@diary), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn-sm btn-danger destroy_diary_#{@diary.id}"%></td>-->
+      <% end %>
+    <td>
+ 　 <% end %>
   </div>
  </div>
 </div>
