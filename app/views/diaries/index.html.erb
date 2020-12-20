@@ -1,7 +1,7 @@
 <div class="container">
  <div class='row'>
   <div class="col-xs-9">
-   <h2>日記一覧</h2>
+   <h2>わたしの記録一覧</h2>
   	<table class='table'>
 		<tr>
 		 <th></th>
@@ -28,17 +28,15 @@
 				<td>
 				 <ul class="list-style:none">
 				    <i class="glyphicon glyphicon-bullhorn">
-        <%= link_to "#{diary.diary_comments.count} エール", diary_path(diary.id) %>
-        <%= render "favorites/favorite-btn", diary: diary %>
-        </li>
+        <%= link_to "#{diary.diary_comments.count} エール", diary_path(diary.id) %></li>
+        <i class="favorite-btn"><%= render "favorites/favorite-btn", diary: diary %></td>
      </ul>
 				</td>
 				<td>
-      <!--% if diary.user == current_user %>-->
-      <!-- <td>%= link_to 'Edit', edit_diary_path(@diary), class: "btn-sm btn-success edit_diary_#{@diary.id}" %></td>-->
-      <!-- <td>%= link_to 'Edit', edit_diary_path(@diary), class: "btn-sm btn-success" %></td>-->
-      <!-- <td>%= link_to 'Destroy', diary_path(@diary), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn-sm btn-danger destroy_diary_#{@diary.id}"%></td>-->
-      <!--% end %>-->
+      <% if diary.user == current_user %>
+       <td><%= link_to 'Edit', edit_diary_path(diary), class: "btn-sm btn-success edit_diary_#{diary.id}" %></td>
+       <td><%= link_to 'Destroy', diary_path(diary), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn-sm btn-danger destroy_diary_#{diary.id}"%></td>
+      <% end %>
     <td>
  　 <% end %>
   </tr>

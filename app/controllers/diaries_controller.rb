@@ -1,4 +1,5 @@
 class DiariesController < ApplicationController
+
   def new
     @diary = Diary.new
   end
@@ -11,7 +12,9 @@ class DiariesController < ApplicationController
   end
 
   def index
-    @diaries = Diary.page(params[:page]).reverse_order
+    # @diaries = Diary.page(params[:page]).reverse_order
+    @user = current_user
+    @diaries = @user.diaries.page(params[:page]).per(10)
   end
 
   def show
@@ -27,6 +30,15 @@ class DiariesController < ApplicationController
 
   def edit
     @diary = Diary.find(params[:id])
+  end
+
+  def update
+    @diary = Diary.find(params[:id])
+    if @diary.update(diary_params)
+      redirect_to diaries_path(@diary), notice: "You have updated diary successfully."
+    else
+      render "edit"
+    end
   end
 
   private

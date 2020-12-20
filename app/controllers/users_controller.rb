@@ -31,6 +31,17 @@ class UsersController < ApplicationController
   end
 
   def graph
+    gon.weight = []
+    current_user.diaries.each do |diary|
+      gon.weight << current_user.weight
+    end
+
+    gon.target_weights = []
+    gon.diaries = []
+    current_user.diaries.each do |diary|
+      gon.target_weights << current_user.target_weight
+      gon.diaries << diary.date.strftime('%m月%d日')
+    end
     sum = 0
     gon.bardata = []
     gon.linedata = []

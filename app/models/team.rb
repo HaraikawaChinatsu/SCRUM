@@ -14,4 +14,12 @@ class Team < ApplicationRecord
   def my_team?(my_user_id)
     my_user_id == user_id
   end
+
+  def average_weight()
+    weight = 0.0
+    self.team_members.each do |team_member|
+      weight += team_member.user.weight
+    end
+    return (weight / self.team_members.count).floor(2).to_f
+  end
 end

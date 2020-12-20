@@ -1,14 +1,14 @@
        <td>
           <% if diary.favorited_by?(current_user) %>
          <li>
-          <%= link_to diary_favorites_path(diary), method: :delete do %>
+          <%= link_to diary_favorites_path(diary), method: :delete, remote: true do %>
           <i class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red;"></i>
            <%= diary.favorites.count %> すごいね
           <% end %>
          </li>
           <% else %>
          <li>
-          <%= link_to diary_favorites_path(diary), method: :post do %>
+          <%= link_to diary_favorites_path(diary), method: :post, remote: true do %>
           <i class="glyphicon glyphicon-heart-empty" aria-hidden="true"></i>
            <%= diary.favorites.count %> すごいね
          <% end %>

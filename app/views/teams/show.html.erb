@@ -9,7 +9,7 @@
     </tr>
     <tr>
       <td>チーム平均体重</td>
-      <td>：<%= @team.name %></td>
+      <td>：<%= @team.average_weight %>kg</td>
 　　</tr>
 　　<tr>
       <td>チーム紹介</td>
@@ -18,25 +18,28 @@
 　 </table>
 　 <h2>チームメンバー一覧</h2>
 　 <table>
-　　<tr>
+　  <tr>
 			  <% @team_members.each do |team_member| %>
 	  	</tr>
 	  	<tr>
-				 <ul class="list-style:none">
-      <li><%= attachment_image_tag team_member.user, :image, size: "100x100", class: 'icon_image', fallback: "no_image.jpg" %></li>
-      <li><%= team_member.user.name %></li>
-     </ul>
-     <ul class="list-style:none">
-      <li><%= team_member.user.body %></li>
-     </ul>
-		  </tr>
+      <td>
+       <dl>
+        <dt><%= attachment_image_tag team_member.user, :image, size: "100x100", class: 'icon_image', fallback: "no_image.jpg" %></dt>
+        <dd>
+          <div class='arrow_box'>
+            <%= link_to user_path(team_member.user_id) do %>
+            <%= team_member.user.name %>
+            <% end %></br>
+            <%= team_member.user.body %>
+          </div>
+        </dd>
+       </dl>
+       </td>
+    </tr>
 		  <% end %>
 		  </table>
 		 </div>
-		</div>
 
-
-<div class='row'>
  <div class='col-xs-8'>
 	 <h2>日記一覧</h2>
  	<table class='table'>
@@ -70,14 +73,8 @@
         </li>
      </ul>
 				</td>
-				<td>
-      <!--% if diary.user == current_user %>-->
-      <!-- <td>%= link_to 'Edit', edit_diary_path(@diary), class: "btn-sm btn-success edit_diary_#{@diary.id}" %></td>-->
-      <!-- <td>%= link_to 'Destroy', diary_path(@diary), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn-sm btn-danger destroy_diary_#{@diary.id}"%></td>-->
-      <!--% end %>-->
-    <td>
  　 <% end %>
   </tr>
   </div>
+  </div>
  </div>
-</div>

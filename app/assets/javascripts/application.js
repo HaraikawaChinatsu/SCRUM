@@ -17,3 +17,47 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require_tree .
+
+$(document).on('turbolinks:load', function() {
+  if ($('#myLineChart').length) {
+    var ctx = document.getElementById("myLineChart");
+    var myLineChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: gon.diaries,
+        datasets: [
+          {
+            label: '目標体重（kg）',
+            data: gon.target_weights,
+            borderColor: "rgba(255,0,0,1)",
+            backgroundColor: "rgba(0,0,0,0)"
+          },
+          {
+            label: '記録体重（kg）',
+            data: gon.weights,
+            borderColor: "rgba(0,0,255,1)",
+            backgroundColor: "rgba(0,0,0,0)"
+          }
+        ],
+      },
+      options: {
+        title: {
+          display: true,
+          text: ''
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+              suggestedMax: 60,
+              suggestedMin: 20,
+              stepSize: 10,
+              callback: function(value, index, values){
+                return  value +  'kg'
+              }
+            }
+          }]
+        },
+      }
+    });
+  }
+});
