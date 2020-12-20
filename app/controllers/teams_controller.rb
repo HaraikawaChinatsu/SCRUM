@@ -1,5 +1,4 @@
 class TeamsController < ApplicationController
-
   def new
     @team = Team.new
     # @team.users << current_user
@@ -26,7 +25,12 @@ class TeamsController < ApplicationController
 
   def show
     @team = Team.find(params[:id])
-    @team_members = TeamMember.all
+    # チームのメンバーが入る
+    @team_members = TeamMember.where(team_id: @team.id)
+    user_ids = TeamMember.where(team_id: @team.id).pluck(:user_id)
+    pp @team_members
+    # チームメンバーから、ユーザーIDをとってくる
+    @diaries = Diary.where(user_id: user_ids)
   end
 
   def destroy
@@ -36,8 +40,8 @@ class TeamsController < ApplicationController
   end
 
   private
-  def team_params
-    params.require(:team).permit(:name, :introduction, :image, :minimum_people, :max_people )
-  end
 
+  def team_params
+    params.require(:team).permit(:name, :introduction, :image, :minimum_people, :max_people)
+  end
 end

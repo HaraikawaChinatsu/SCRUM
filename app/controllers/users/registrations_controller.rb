@@ -63,15 +63,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :check_guest, only: :destroy
 
   def check_guest
-    if resource.email == 'guest@example.com'
-      redirect_to root_path, alert: 'ゲストユーザーは削除できません。'
-    end
+    redirect_to root_path, alert: 'ゲストユーザーは削除できません。' if resource.email == 'guest@example.com'
   end
 
-
-# private
-# 　def user_params
-#     params[:user].permit(:email, :name, :password, :password_confirmation, :age, :target_weight, :weight, :public_status )
-# 　end
-
+  # private
+  # 　def user_params
+  #     params[:user].permit(:email, :name, :password, :password_confirmation, :age, :target_weight, :weight, :public_status )
+  # 　end
 end

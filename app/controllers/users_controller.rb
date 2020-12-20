@@ -1,14 +1,11 @@
 class UsersController < ApplicationController
-
   before_action :authenticate_user!
   # before_action :ensure_correct_user, only: [:edit, :update]
-
 
   def mypage
     @user = current_user
     @diaries = current_user.diaries
     @diary = Diary.new
-    # @team = Team.find(params[:team_id])
   end
 
   def show
@@ -23,14 +20,13 @@ class UsersController < ApplicationController
     @diary = Diary.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @user.update(user_params)
       redirect_to mypage_path, notice: '会員情報の更新が完了しました。'
     else
-      render "edit"
+      render 'edit'
     end
   end
 
@@ -38,17 +34,18 @@ class UsersController < ApplicationController
     sum = 0
     gon.bardata = []
     gon.linedata = []
-    6.times do |i|
+    6.times do |_i|
       data = rand(100.0)
       gon.bardata << data
-      sum = sum + data
+      sum += data
       gon.linedata << sum
-      end
+    end
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:email, :name, :password, :password_confirmation, :age, :target_weight, :weight, :public_status, :body, :image)
+    params.require(:user).permit(:email, :name, :password, :password_confirmation, :age, :target_weight, :weight,
+                                 :public_status, :body, :image)
   end
 end

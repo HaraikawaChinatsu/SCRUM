@@ -4,18 +4,18 @@
    <h2>日記一覧</h2>
   	<table class='table'>
 		<tr>
-		  <% @diaries.each do |diary| %>
 		 <th></th>
 			<th>タイトル</th>
 			<th>記録日</th>
 			<th></th>
 			<th></th>
 		</tr>
+			  <% @diaries.each do |diary| %>
 		<tr>
 				<td>
-				 <ul class="inline-meta">
+				 <ul class="list-style:none">
       <li>
-       <%= attachment_image_tag @user, :image, size: "100x100", class: 'icon_image' %>
+       <%= attachment_image_tag @user, :image, size: "100x100", class: 'icon_image', fallback: "no_image.jpg" %>
       </li>
       <li>By  <%= diary.user.name %>
       </li>
@@ -26,25 +26,22 @@
         <% end %></td>
 				<td><%= diary.date.strftime("%Y年%m月%d日") %></td>
 				<td>
-				 <ul class="inline-meta">
-       <li>
-        <%= render "favorites/favorite-btn", diary: diary %></td>
-       </li>
-       <li>
+				 <ul class="list-style:none">
+				    <i class="glyphicon glyphicon-bullhorn">
         <%= link_to "#{diary.diary_comments.count} エール", diary_path(diary.id) %>
-       </li>
+        <%= render "favorites/favorite-btn", diary: diary %>
+        </li>
      </ul>
 				</td>
 				<td>
-      <% if diary.user == current_user %>
-       <!--<td>%= link_to 'Edit', edit_diary_path(@diary), class: "btn-sm btn-success edit_diary_#{@diary.id}" %></td>-->
-       <!--<td>%= link_to 'Edit', edit_diary_path(@diary), class: "btn-sm btn-success" %></td>-->
-       <!--<td>%= link_to 'Destroy', diary_path(@diary), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn-sm btn-danger destroy_diary_#{@diary.id}"%></td>-->
-      <% end %>
+      <!--% if diary.user == current_user %>-->
+      <!-- <td>%= link_to 'Edit', edit_diary_path(@diary), class: "btn-sm btn-success edit_diary_#{@diary.id}" %></td>-->
+      <!-- <td>%= link_to 'Edit', edit_diary_path(@diary), class: "btn-sm btn-success" %></td>-->
+      <!-- <td>%= link_to 'Destroy', diary_path(@diary), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn-sm btn-danger destroy_diary_#{@diary.id}"%></td>-->
+      <!--% end %>-->
     <td>
  　 <% end %>
+  </tr>
   </div>
  </div>
 </div>
-
-<!--%= paginate @diaries %>-->

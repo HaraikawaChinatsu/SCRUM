@@ -5,53 +5,30 @@
 <div class="container">
  <div class='row'>
   <div class="col-xs-9">
-   <h2>チーム一覧</h2>
+   <h2>リクエスト一覧</h2>
   	<table class='table'>
 		<tr>
-		  <th></th>
-			<th>チーム名</th>
-			<th>チームリーダー</th>
-			<th>参加人数</th>
-			<th>募集人数</th>
-			<th>チーム内目標平均体重</th>
+		 <th>申請チーム</th>
+		 <th></th>
+			<th>名前</th>
+			<th>年代</th>
+			<th>目標体重</th>
+			<th>記録体重</th>
 			<th><th>
 		</tr>
-		<tr>
-     <% @teams.each do |team| %>
+           <% @requests.each do |request| %>
 			<tr>
-				<td>
-            <%= attachment_image_tag team, :image, size: "100x100", class: 'icon_image' %>
-				</td>
-				<td><%= link_to team_path(team.id) do %><%= team.name %>
-            <% end %></td>
-				<td><%= link_to user_path(team.id) do %><%= team.user.name %>
-            <% end %></td>
-				<td><%= @team_members.count %>人</td>
-				<td><%= team.max_people %>人</td>
-				<td><%= team.max_people %>kg</td>
-        <td><% if user_signed_in? %>
-              <!--リクエスト中かどうかをチェック-->
-              <% if current_user.requests.find_by(team: team)&.waiting? %>
-               <p>リクエスト中</p>
-               <!--<p>%= link_to'リクエストを取り消す', team_request_path(team), method: :delete %></p>-->
-               <% elsif TeamMember.where(team_id: team.id, user_id: current_user.id).empty? %>
-              <div class="participation">
-               <%= link_to '参加する', team_requests_path(team), method: :post %>
-              </div>
-             <% else %>
-              <div class="participation">
-               <p>参加中：<%= link_to team_path(team.id) do %><%= team.name %></p>
-             <% end %>
-               </div>
-               <div class="flex">
-	　　　       　　　　<!--%= link_to "退出する", team_path, class: "btn" %>-->
-               </div>
-             <% end %>
-            </div>
-          <% end %>
-        </tr>
-	 	    <% end %>
-	  	  </tr>
+			 <td><%= request.team.name %></td>
+				<td><%= attachment_image_tag request.user, :image, size: "100x100", class: 'icon_image' %></td>
+				<td><%= link_to user_path(request.user.id) do %><%= request.user.name %>
+                    <% end %></td>
+				<td><%= request.user.age %></td>
+				<td><%= request.user.target_weight %>kg</td>
+				<td><%= request.user.weight %>kg</td>
+                <td><%= link_to '参加を許可する', team_request_path(request.team_id,request.id), method: :patch, class: "btn-sm btn-danger"%></td>
+                <td><%= link_to '参加を拒否する', team_request_path(request.team_id,request.id), method: :delete, data: { confirm: '本当に拒否しますか？' }, class: "btn-sm btn-danger"%></td>
+            </tr>
+	 	   <% end %>
 	    </table>
     </div>
    </div>

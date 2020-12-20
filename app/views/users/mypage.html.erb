@@ -7,14 +7,14 @@
 
    <div class="col-xs-4">
     <h2>カレンダー</h2>
-    <%= month_calendar events: @diaries do |date, diaries| %>
-    <%= date.day %>
-    <% diaries.each do |diary| %>
-    <div>
-      <%= link_to diary.title, diary %>
-    </div>
-    <% end %>
-   <% end %>
+   <!-- %= month_calendar events: @diaries do |date, diaries| %>-->
+   <!-- %= date.day %>-->
+   <!-- % diaries.each do |diary| %>-->
+   <!-- <div>-->
+   <!--   %= link_to diary.title, diary %>-->
+   <!-- </div>-->
+   <!-- % end %>-->
+   <!-- % end %>-->
    </div>
 
 
@@ -48,24 +48,27 @@
 				<td colspan="2">:<%= @user.weight %>kg</td>
 			</tr>
 			<tr>
-				<td>グラフ・体重公開ステータス</td>
-				<td colspan="2">:<%= @user.public_status %></td>
-			</tr>
-			<tr>
 				<td>一言</td>
 				<td colspan="2"><%= @user.body %></td>
 			</tr>
 		</tr>
 	</table>
 	<div class="flex">
-		<%= link_to "編集する", edit_user_registration_path, class: "btn" %>
-		<%= link_to "日記をつける", new_diary_path, class: "btn" %>
-		<%= link_to "グラフを見る", graph_path, class: "btn" %>
+		<%= link_to "編集する", edit_user_registration_path, class: 'btn btn-border-shadow' %>
+		<%= link_to "日記をつける", new_diary_path, class: 'btn btn-border-shadow' %>
+		<td></td>
+		<%= link_to "グラフを見る", graph_path, class: 'btn btn-border-shadow' %>
 	</div>
 	<div class="flex">
-	  <td>チーム参加ステータス</td>
-		<!--%= link_to "参加中＆リクエスト中チーム一覧", team_request_path(@team), class: "btn btn-primary" %>-->
-		<%= link_to "チームを新しく作る", new_team_path, class: "btn" %>
+	  <td></td>
+	 　 <% if current_user.team.present? && current_user.team.my_team?(current_user.id) %>
+	  　 <%= link_to "チーム管理", team_requests_path(@user.team_member.team_id), class: 'btn btn-border-shadow' %>
+		<% elsif current_user.team.present? %>
+         <%= link_to "参加中のチームを表示", team_path(@user.team_member.team_id), class: 'btn btn-border-shadow' %>
+	 　 <% else %>
+		 <%= link_to "チームを新しく作る", new_team_path, class: 'btn btn-border-shadow' %>
+		 <%= link_to "チームを探す", teams_path, class: 'btn btn-border-shadow' %>
+		<% end %>
 	</div>
   </div>
  </div>

@@ -1,17 +1,17 @@
 class FavoritesController < ApplicationController
+before_action :authenticate_user!
 
   def create
-    diary = Diary.find(params[:diary_id])
-    favorite = current_user.favorites.new(diary_id: diary.id)
+    @diary = Diary.find(params[:diary_id])
+    favorite = @diary.favorites.new(user_id: current_user.id)
     favorite.save
-    redirect_to diary_path(diary)
+    # app/views/favorites/create.js.erbを参照する
   end
 
   def destroy
-    diary = Diary.find(params[:diary_id])
-    favorite = current_user.favorites.find_by(diary_id: diary.id)
+    @diary = Diary.find(params[:diary_id])
+    favorite = @diary.favorites.find_by(user_id: current_user.id)
     favorite.destroy
-    redirect_to diary_path(diary)
+    # app/views/favorites/destroy.js.erbを参照する
   end
-
 end

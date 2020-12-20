@@ -31,21 +31,23 @@
 				<!--平均体重を計算する-->
 				<td><%= team.max_people %>kg</td>
         <td><% if user_signed_in? %>
-              <!--リクエスト中かどうかをチェック-->
-              <% if current_user.requests.find_by(team: team)&.waiting? %>
+             <!--リクエスト中かどうかをチェック-->
+             <% if current_user.requests.find_by(team: team)&.waiting? %>
                <p>リクエスト中</p>
-               <!--<p>%= link_to'リクエストを取り消す', team_request_path(team), method: :delete %></p>-->
-               <% elsif TeamMember.where(team_id: team.id, user_id: current_user.id).empty? %>
+               <p><%= link_to'リクエストを取り消す', team_request_path(team.id, current_user.requests.where(team_id: team.id).first.id), method: :delete %></p>
+             <% elsif TeamMember.where(team_id: team.id, user_id: current_user.id).empty? %>
               <div class="participation">
                <%= link_to '参加する', team_requests_path(team), method: :post %>
               </div>
+             <% elsif current_user.id == team.user_id %>
+              <div class="participation">
+               <p>オーナーチーム：<%= link_to team_path(team.id) do %><%= team.name %></p><% end %>
              <% else %>
               <div class="participation">
-               <p>参加中：<%= link_to team_path(team.id) do %><%= team.name %></p>
-             <% end %>
+               <p>参加中チーム：<%= link_to team_path(team.id) do %><%= team.name %></p><% end %>
                </div>
                <div class="flex">
-	　　　       　　　　<!--%= link_to "退出する", team_path, class: "btn" %>-->
+                <%= link_to "退出する", team_path(team.id), class: "btn" %>
                </div>
              <% end %>
             </div>

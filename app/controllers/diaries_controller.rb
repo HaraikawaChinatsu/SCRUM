@@ -1,5 +1,4 @@
 class DiariesController < ApplicationController
-
   def new
     @diary = Diary.new
   end
@@ -31,8 +30,8 @@ class DiariesController < ApplicationController
   end
 
   private
+
   def diary_params
     params.require(:diary).permit(:title, :date, :weight, :text, :image)
   end
-
 end
