@@ -6,6 +6,7 @@ class TeamsController < ApplicationController
 
   def index
     @teams = Team.all
+    # team = Team.find(params[:id])
     @team_members = TeamMember.all
   end
 
@@ -31,7 +32,6 @@ class TeamsController < ApplicationController
     # チームメンバーから、ユーザーIDをとってくる
     @diaries = Diary.where(user_id: user_ids)
     @weight = User.average(:weight).floor(2).to_f
-    # @weight = user_ids.average(:weight).floor(2).to_f
   end
 
   def destroy

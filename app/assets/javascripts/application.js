@@ -28,13 +28,13 @@ $(document).on('turbolinks:load', function() {
         datasets: [
           {
             label: '目標体重（kg）',
-            data: gon.target_weights,
+            data:gon.target_weights,
             borderColor: "rgba(255,0,0,1)",
             backgroundColor: "rgba(0,0,0,0)"
           },
           {
             label: '記録体重（kg）',
-            data: gon.weights,
+            data:gon.weight,
             borderColor: "rgba(0,0,255,1)",
             backgroundColor: "rgba(0,0,0,0)"
           }
@@ -59,5 +59,6 @@ $(document).on('turbolinks:load', function() {
         },
       }
     });
+    debugger
   }
 });

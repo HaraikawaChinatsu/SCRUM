@@ -20,11 +20,13 @@ class UsersController < ApplicationController
     @diary = Diary.new
   end
 
-  def edit; end
+  def edit
+    
+  end
 
   def update
-    if @user.update(user_params)
-      redirect_to mypage_path, notice: '会員情報の更新が完了しました。'
+    if current_user.update(user_params)
+      redirect_to mypage_path(current_user), notice: '会員情報の更新が完了しました。'
     else
       render 'edit'
     end

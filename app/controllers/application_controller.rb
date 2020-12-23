@@ -6,6 +6,15 @@ class ApplicationController < ActionController::Base
   #     mypage_path(resource.id)
   # 　end
 
+  def after_sign_in_path_for(resource)
+    mypage_path
+  end
+  
+  def after_update_path_for(resource)
+    mypage_path
+  end
+
+
   private
 
   def configure_permitted_parameters

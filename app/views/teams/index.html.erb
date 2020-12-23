@@ -12,7 +12,6 @@
 			<th>チーム名</th>
 			<th>チームリーダー</th>
 			<th>参加人数</th>
-			<th>募集人数</th>
 			<th>チーム内目標平均体重</th>
 			<th><th>
 		</tr>
@@ -27,7 +26,6 @@
 				<td><%= link_to user_path(team.id) do %><%= team.user.name %>
             <% end %></td>
 				<td><%= @team_members.count %>人</td>
-				<td><%= team.max_people %>人</td>
 				<!--平均体重を計算する-->
 				<td><%= team.average_weight %>kg</td>
         <td><% if user_signed_in? %>

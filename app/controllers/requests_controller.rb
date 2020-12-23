@@ -32,9 +32,9 @@ class RequestsController < ApplicationController
     @request = current_user.requests.new(team: @team, status: 'waiting')
 
     if @request.save
-      redirect_to teams_path, notice: 'リクエストを送りました'
+      redirect_to teams_path, notice: 'リクエストを送りました' and return
     else
-      render teams_path, notice: 'リクエストに失敗しました'
+      render teams_path, notice: 'リクエストに失敗しました' and return
     end
   end
 
@@ -42,7 +42,7 @@ class RequestsController < ApplicationController
     @request = Request.find(params[:id])
 
    if @request.present?
-      redirect_to teams_path, notice: 'リクエストが存在しません'
+      redirect_to teams_path, notice: 'リクエストが存在しません' and return
    end
 
   # if @request.approved?
@@ -54,10 +54,10 @@ class RequestsController < ApplicationController
 
    if @owner == current_user
     @request.destroy
-    redirect_to team_requests_path, notice: 'リクエストを拒否しました'
+    redirect_to team_requests_path, notice: 'リクエストを拒否しました' and return
    else
     @request.destroy
-    render teams_path, notice: 'リクエストを取り消しました'
+    render teams_path, notice: 'リクエストを取り消しました' and return
    end
   end
 end

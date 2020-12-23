@@ -15,11 +15,12 @@
       </tr>
     </table>
       <div class='col-xs-9'>
-        <table class='table'>
+       <table class='table'>
         <%= @diary.text %>
-        </table>
+       </table>
       </div>
-    <table>
+     <div class='col-xs-9'>
+      <table class='table'>
         <td class="favorite-btn"><%= render "favorites/favorite-btn", diary: @diary %></td>
         <td class="comments-count">エール数: <%= @diary.diary_comments.count %></td>
 
@@ -27,18 +28,20 @@
           <td><%= link_to 'Edit', edit_diary_path(@diary), class: "btn-sm btn-success edit_diary_#{@diary.id}" %></td>
           <td><%= link_to 'Destroy', diary_path(@diary), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn-sm btn-danger destroy_diary_#{@diary.id}"%></td>
         <% end %>
-      </tr>
-    </table>
-    <table class="diary_comments">
-     <div class='col-xs-9'>
-      <%= render 'diary_comments/index', diary: @diary %>
+       </tr>
+      </table>
      </div>
+    <table class="diary_comments">
+      <%= render 'diary_comments/index', diary: @diary %>
     </table>
-
-    <%= form_with model:[@diary,@diary_comment] do |f| %>
+   <div class='col-xs-9'>
+    <table class='table'>
+     <%= form_with model:[@diary,@diary_comment] do |f| %>
      <%= f.text_area :comment, size:"90x5" %>
      <%= f.submit '送信'%>
      <% end %>
+    </table>
+   </div>
 
     </div>
    </div>

@@ -17,6 +17,9 @@ class User < ApplicationRecord
 
   attachment :image
 
+  def graph
+    default_scope -> { order(date: :asc) }
+  end
 
 
 end

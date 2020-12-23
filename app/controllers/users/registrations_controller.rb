@@ -66,8 +66,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
     redirect_to root_path, alert: 'ゲストユーザーは削除できません。' if resource.email == 'guest@example.com'
   end
 
-  # private
-  # 　def user_params
-  #     params[:user].permit(:email, :name, :password, :password_confirmation, :age, :target_weight, :weight, :public_status )
-  # 　end
+  # def update_resource(resource, params)
+  #   resource.update_without_password(params)
+  # end
+
+  # def after_update_path_for(resource)
+  #   mypage_path
+  # end
+
+  # def configure_account_update_params
+  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+  # end
+
 end
