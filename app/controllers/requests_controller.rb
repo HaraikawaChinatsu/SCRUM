@@ -41,13 +41,9 @@ class RequestsController < ApplicationController
   def destroy
     @request = Request.find(params[:id])
 
-   if @request.present?
-      redirect_to teams_path, notice: 'リクエストが存在しません' and return
+   if @request.approved?
+    redirect_to teams_path, notice: 'リクエストは許可済みです' and return
    end
-
-  # if @request.approved?
-  #     redirect_to teams_path, notice: 'リクエストは許可済みです'
-  # end
 
    @team = Team.find(@request.team_id)
    @owner = @team.user_id
@@ -57,7 +53,7 @@ class RequestsController < ApplicationController
     redirect_to team_requests_path, notice: 'リクエストを拒否しました' and return
    else
     @request.destroy
-    render teams_path, notice: 'リクエストを取り消しました' and return
+    redirect_to teams_path, notice: 'リクエストを取り消しました' and return
    end
   end
 end

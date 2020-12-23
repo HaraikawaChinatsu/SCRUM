@@ -28,5 +28,5 @@ Rails.application.routes.draw do
   resources :teams do
     resources :requests, only: %i[new index create show destroy update]
   end
-  resources :team_members, only: %i[new index create show]
+  resources :team_members, only: %i[new index create show destroy]
 end

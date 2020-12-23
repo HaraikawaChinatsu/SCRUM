@@ -41,11 +41,12 @@
               <div class="participation">
                <p>オーナーチーム：<%= link_to team_path(team.id) do %><%= team.name %></p><% end %>
              <% else %>
+              <% team_member_id = TeamMember.where(team_id: team.id, user_id: current_user.id).first.id %>
               <div class="participation">
                <p>参加中チーム：<%= link_to team_path(team.id) do %><%= team.name %></p><% end %>
                </div>
                <div class="flex">
-                <%= link_to "退出する", team_path(team.id), class: "btn" %>
+                <%= link_to "退出する", team_member_path(team_member_id), class: "btn", method: :delete %>
                </div>
              <% end %>
             </div>

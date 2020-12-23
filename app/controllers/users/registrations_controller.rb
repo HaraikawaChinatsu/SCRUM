@@ -38,7 +38,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
@@ -66,9 +66,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     redirect_to root_path, alert: 'ゲストユーザーは削除できません。' if resource.email == 'guest@example.com'
   end
 
-  # def update_resource(resource, params)
-  #   resource.update_without_password(params)
-  # end
+  # 追記する
+  def update_resource(resource, params)
+    resource.update_without_password(params)
+  end
 
   # def after_update_path_for(resource)
   #   mypage_path
