@@ -25,7 +25,8 @@
             <% end %></td>
 				<td><%= link_to user_path(team.id) do %><%= team.user.name %>
             <% end %></td>
-				<td><%= @team_members.count %>人</td>
+				<td><% team_member = TeamMember.where(team_id: team.id) %>
+				 　<%= team_member.count %>人</td>
 				<!--平均体重を計算する-->
 				<td><%= team.average_weight %>kg</td>
         <td><% if user_signed_in? %>
