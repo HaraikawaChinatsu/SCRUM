@@ -6,6 +6,7 @@ class UsersController < ApplicationController
     @user = current_user
     @diaries = current_user.diaries
     @diary = Diary.new
+    @team = Team.all
   end
 
   def show
@@ -21,7 +22,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    
+
   end
 
   def update
@@ -60,5 +61,9 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:email, :name, :password, :password_confirmation, :age, :target_weight, :weight,
                                  :public_status, :body, :image)
+  end
+
+  def team_params
+    params.require(:team).permit(:name, :introduction, :image, :minimum_people, :max_people)
   end
 end

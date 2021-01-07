@@ -4,6 +4,7 @@ class Team < ApplicationRecord
   # チームキャプテンとなるのユーザー
   belongs_to :user
   has_many :requests
+  has_many :tags, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
   attachment :image

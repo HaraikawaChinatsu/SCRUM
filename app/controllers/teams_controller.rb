@@ -6,7 +6,6 @@ class TeamsController < ApplicationController
 
   def index
     @teams = Team.all
-    # team = Team.find(params[:id])
     @team_members = TeamMember.all
   end
 
@@ -17,6 +16,10 @@ class TeamsController < ApplicationController
     # チームに所属するユーザーの中にも、current_userが入る
     @team.users << current_user
     if @team.save
+      tags = Vision.get_image_data(@team.image)
+      tags.each do |tag|
+      @team.tags.create(name: tag)
+      end
       redirect_to teams_path, notice: 'チームを作成しました'
     else
       render :new
@@ -38,6 +41,9 @@ class TeamsController < ApplicationController
     @team = Team.find(params[:id])
     @team.destroy
     redirect_to teams_path
+  end
+
+  def edit
   end
 
   private
