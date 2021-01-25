@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SCRUM</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= Gon::Base.render_data %>
+    <%= include_gon %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+
+    <% if user_signed_in? %>
+     <header class="header">
+       <div class="container">
+         <div class="navbar-header">
+           <%= link_to image_tag("logo.png", class: "image"), top_path %>
+           <ul id="navbar" class="nav navbar-nav navbar-right navbar-collapse collapse">
+            <li><%= link_to 'HOME', top_path, class: "link" %></li>
+            <li><%= link_to 'About', about_path, class: "link" %></li>
+            <li><%= link_to 'My page', mypage_path, class: "link" %></li>
+            <li><%= link_to 'Diary', diaries_path, class: "link" %></li>
+            <li><%= link_to 'Team', teams_path, class: "link" %></li>
+            <li><%= link_to 'Logout', sign_out_path, class: "link" %></li>
+          </ul>
+        </div>
+      </header>
+    <% else %>
+      <header class="header">
+        <div class="header-content">
+          <%= link_to image_tag("logo.png", class: "image"), top_path %>
+          <ul id="navbar" class="nav navbar-nav navbar-right navbar-collapse collapse">
+            <li><%= link_to 'HOME', top_path, class: "link" %></li>
+            <li><%= link_to 'About', about_path, class: "link" %></li>
+            <li><%= link_to 'Sign Up', new_user_registration_path, class: "link" %></li>
+            <li><%= link_to 'Login', new_user_session_path, class: "link" %></li>
+          </ul>
+        </div>
+      </header>
+     </div>
+    <% end %>
+
+   <div class="container body-down">
+    <div class="row">
+     <%= yield %>
+    </div>
+   </div>
+
+    <!--<footer>-->
+    <!-- <nav class="navbar navbar-dark" style="background-color:#b9cdbf;">-->
+    <!--  Copyright © Infratop Inc. All Rights Reserved.-->
+    <!-- <nav>-->
+    <!--</footer>-->
+</html>

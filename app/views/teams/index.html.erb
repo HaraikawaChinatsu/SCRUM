@@ -1,0 +1,67 @@
+<% if flash[:notice] %>
+ <p class="text-active"><%= flash[:notice] %></p>
+<% end %>
+
+<div class="container">
+ <div class='row'>
+  <div class="col-xs-9">
+   <h2>チーム一覧</h2>
+  	<table class='table'>
+		<tr>
+		  <th></th>
+	  <th>チームイメージ（タグ）</th>
+			<th>チーム名</th>
+			<th>チームリーダー</th>
+			<th>参加人数</th>
+			<th>チーム内目標平均体重</th>
+			<th><th>
+		</tr>
+		<tr>
+     <% @teams.each do |team| %>
+			<tr>
+				<td>
+      <%= attachment_image_tag team, :image, size: "100x100", class: 'icon_image' %>
+				</td>
+				<td>
+				  <% team.tags.each do |tag| %>
+        <span class="team_label"><%= tag.name %></span>
+      <% end %>
+    </td>
+				<td><%= link_to team_path(team.id) do %><%= team.name %>
+            <% end %></td>
+				<td><%= link_to user_path(team.id) do %><%= team.user.name %>
+            <% end %></td>
+				<td><% team_member = TeamMember.where(team_id: team.id) %>
+				 　<%= team_member.count %>人</td>
+				<!--平均体重を計算する-->
+				<td><%= team.average_weight %>kg</td>
+        <td><% if user_signed_in? %>
+             <!--リクエスト中かどうかをチェック-->
+             <% if current_user.requests.find_by(team: team)&.waiting? %>
+               <p>リクエスト中</p>
+               <p><%= link_to'リクエストを取り消す', team_request_path(team.id, current_user.requests.where(team_id: team.id).first.id), method: :delete %></p>
+             <% elsif TeamMember.where(team_id: team.id, user_id: current_user.id).empty? %>
+              <div class="participation">
+               <%= link_to '参加する', team_requests_path(team), method: :post %>
+              </div>
+             <% elsif current_user.id == team.user_id %>
+              <div class="participation">
+               <p>オーナーチーム：<%= link_to team_path(team.id) do %><%= team.name %></p><% end %>
+             <% else %>
+              <% team_member_id = TeamMember.where(team_id: team.id, user_id: current_user.id).first.id %>
+              <div class="participation">
+               <p>参加中チーム：<%= link_to team_path(team.id) do %><%= team.name %></p><% end %>
+               </div>
+               <div class="flex">
+                <%= link_to "退出する", team_member_path(team_member_id), class: "btn", method: :delete %>
+               </div>
+             <% end %>
+            </div>
+          <% end %>
+        </tr>
+	 	    <% end %>
+	  	  </tr>
+	    </table>
+    </div>
+   </div>
+ </div>

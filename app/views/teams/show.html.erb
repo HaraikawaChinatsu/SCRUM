@@ -1,0 +1,80 @@
+<div class="container">
+ <div class='row'>
+  <div class='col-xs-4'>
+		 <h2>チーム詳細</h2>
+　 <table class='table'>
+    <tr>
+      <td>チーム名</td>
+      <td>：<%= @team.name %></td>
+    </tr>
+    <tr>
+      <td>チーム平均体重</td>
+      <td>：<%= @team.average_weight %>kg</td>
+　　</tr>
+　　<tr>
+      <td>チーム紹介</td>
+      <td>：<%= @team.introduction %></td>
+　　</tr>
+　 </table>
+　 <h2>チームメンバー一覧</h2>
+　 <table>
+　  <tr>
+			  <% @team_members.each do |team_member| %>
+	  	</tr>
+	  	<tr>
+      <td>
+       <dl>
+        <dt><%= attachment_image_tag team_member.user, :image, size: "100x100", class: 'icon_image', fallback: "no_image.jpg" %></dt>
+        <dd>
+          <div class='arrow_box'>
+            <%= link_to user_path(team_member.user_id) do %>
+            <%= team_member.user.name %>
+            <% end %></br>
+            <%= team_member.user.body %>
+          </div>
+        </dd>
+       </dl>
+       </td>
+    </tr>
+		  <% end %>
+		  </table>
+		 </div>
+
+ <div class='col-xs-8'>
+	 <h2>日記一覧</h2>
+ 	<table class='table'>
+		<tr>
+		 <th></th>
+			<th>タイトル</th>
+			<th>記録日</th>
+			<th></th>
+			<th></th>
+		</tr>
+			  <% @diaries.each do |diary| %>
+		<tr>
+				<td>
+				 <ul class="list-style:none">
+      <li>
+       <%= attachment_image_tag diary.user, :image, size: "100x100", class: 'icon_image', fallback: "no_image.jpg" %>
+      </li>
+      <li>By  <%= diary.user.name %>
+      </li>
+     </ul>
+				</td>
+				<td><%= link_to diary_path(diary.id) do %>
+        <%= diary.title %>
+        <% end %></td>
+				<td><%= diary.date.strftime("%Y年%m月%d日") %></td>
+				<td>
+				 <ul class="list-style:none">
+				    <i class="glyphicon glyphicon-bullhorn">
+        <%= link_to "#{diary.diary_comments.count} エール", diary_path(diary.id) %>
+        <%= render "favorites/favorite-btn", diary: diary %>
+        </li>
+     </ul>
+				</td>
+ 　 <% end %>
+  </tr>
+  </div>
+  </div>
+ </div>

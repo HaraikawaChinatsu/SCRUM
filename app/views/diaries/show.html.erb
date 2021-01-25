@@ -1,0 +1,48 @@
+<div class="container">
+ <div class='row'>
+  <div class='col-xs-9'>
+		<h2>日記詳細</h2>
+		<table class='table'>
+		  <tr>
+        <td><%= link_to user_path(@diary.user) do %>
+          <%= attachment_image_tag(@diary.user, :image, :fill, 100, 100, fallback: "no_image.jpg") %><br>
+          <%= @diary.user.name %>
+          <% end %>
+        </td>
+        <td><%= @diary.title %></td>
+        <td><%= @diary.date.strftime("%Y年%m月%d日") %></td>
+        <td><%= @diary.weight %>kg</td>
+      </tr>
+    </table>
+      <div class='col-xs-9'>
+       <table class='table'>
+        <%= @diary.text %>
+       </table>
+      </div>
+     <div class='col-xs-9'>
+      <table class='table'>
+        <td class="favorite-btn"><%= render "favorites/favorite-btn", diary: @diary %></td>
+        <td class="comments-count">エール数: <%= @diary.diary_comments.count %></td>
+
+        <% if @diary.user == current_user %>
+          <td><%= link_to 'Edit', edit_diary_path(@diary), class: "btn-sm btn-success edit_diary_#{@diary.id}" %></td>
+          <td><%= link_to 'Destroy', diary_path(@diary), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn-sm btn-danger destroy_diary_#{@diary.id}"%></td>
+        <% end %>
+       </tr>
+      </table>
+     </div>
+    <table class="diary_comments">
+      <%= render 'diary_comments/index', diary: @diary %>
+    </table>
+   <div class='col-xs-9'>
+    <table class='table'>
+     <%= form_with model:[@diary,@diary_comment] do |f| %>
+     <%= f.text_area :comment, size:"90x5" %>
+     <%= f.submit '送信'%>
+     <% end %>
+    </table>
+   </div>
+
+    </div>
+   </div>
+  </div>

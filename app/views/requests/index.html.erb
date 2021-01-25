@@ -1,0 +1,35 @@
+<% if flash[:notice] %>
+ <p class="text-active"><%= flash[:notice] %></p>
+<% end %>
+
+<div class="container">
+ <div class='row'>
+  <div class="col-xs-9">
+   <h2>リクエスト一覧</h2>
+  	<table class='table'>
+		<tr>
+		 <th>申請チーム</th>
+		 <th></th>
+			<th>名前</th>
+			<th>年代</th>
+			<th>目標体重</th>
+			<th>記録体重</th>
+			<th><th>
+		</tr>
+           <% @requests.each do |request| %>
+			<tr>
+			 <td><%= request.team.name %></td>
+				<td><%= attachment_image_tag request.user, :image, size: "100x100", class: 'icon_image' %></td>
+				<td><%= link_to user_path(request.user.id) do %><%= request.user.name %>
+                    <% end %></td>
+				<td><%= request.user.age %></td>
+				<td><%= request.user.target_weight %>kg</td>
+				<td><%= request.user.weight %>kg</td>
+                <td><%= link_to '参加を許可する', team_request_path(request.team_id,request.id), method: :patch, class: "btn-sm btn-danger"%></td>
+                <td><%= link_to '参加を拒否する', team_request_path(request.team_id,request.id), method: :delete, data: { confirm: '本当に拒否しますか？' }, class: "btn-sm btn-danger"%></td>
+            </tr>
+	 	   <% end %>
+	    </table>
+    </div>
+   </div>
+ </div>
