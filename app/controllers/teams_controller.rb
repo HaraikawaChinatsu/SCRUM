@@ -7,6 +7,8 @@ class TeamsController < ApplicationController
   def index
     @teams = Team.all
     @team_members = TeamMember.all
+    @search = Team.ransack(params[:q])
+    @teams_search = @search.result
   end
 
   def create
